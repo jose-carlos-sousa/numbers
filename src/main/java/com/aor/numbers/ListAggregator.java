@@ -7,6 +7,12 @@ import java.util.List;
  * into a single integer using various functions.
  */
 public class ListAggregator {
+    private final GenericListDeduplicator deduplicator;
+
+    public ListAggregator(GenericListDeduplicator deduplicator) {
+        this.deduplicator = deduplicator;
+    }
+
     /**
      * Sums all numbers in a list.
      * @return The sum of all the values in the list.
@@ -52,7 +58,7 @@ public class ListAggregator {
      * Counts the number of distinct numbers in a list.
      * @return The number of distinct numbers.
      */
-    public int distinct(List<Integer> list,GenericListDeduplicator deduplicator) {
+    public int distinct(List<Integer> list) {
 
         List<Integer> distinct = deduplicator.deduplicate(list);
 
