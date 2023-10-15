@@ -26,9 +26,9 @@ public class ListDeduplicator implements GenericListDeduplicator {
         for (Integer number : sorted)
             if (!number.equals(last)) {
                 last = number;
-                if(!unique.contains(number)){
-                    unique.add(number);
-                }
+
+                unique.add(number);
+
 
             }
 

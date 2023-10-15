@@ -15,7 +15,7 @@ public class ListAggregatorTest {
     public void sum() {
         List<Integer> list = giveList();
 
-        ListAggregator aggregator = new ListAggregator();
+        ListAggregator aggregator = new ListAggregator(new ListDeduplicator());
         int sum = aggregator.sum(list);
 
         Assertions.assertEquals(14, sum);
@@ -25,7 +25,7 @@ public class ListAggregatorTest {
     public void max() {
         List<Integer> list = giveList();
 
-        ListAggregator aggregator = new ListAggregator();
+        ListAggregator aggregator = new ListAggregator(new ListDeduplicator());
         int max = aggregator.max(list);
 
         Assertions.assertEquals(5, max);
@@ -35,7 +35,7 @@ public class ListAggregatorTest {
     public void min() {
         List<Integer> list = giveList();
 
-        ListAggregator aggregator = new ListAggregator();
+        ListAggregator aggregator = new ListAggregator(new ListDeduplicator());
         int min = aggregator.min(list);
 
         Assertions.assertEquals(1, min);
@@ -44,7 +44,7 @@ public class ListAggregatorTest {
     public void max_bug_7263 () {
         List<Integer> list = Arrays.asList(-1,-4,-5);
 
-        ListAggregator aggregator = new ListAggregator();
+        ListAggregator aggregator = new ListAggregator( new ListDeduplicator());
         int max = aggregator.max(list);
 
         Assertions.assertEquals(-1, max);
@@ -56,21 +56,21 @@ public class ListAggregatorTest {
         List<Integer> list = giveList();
 
 
-        ListAggregator aggregator = new ListAggregator();
-        int distinct = aggregator.distinct(list, new ListDeduplicator());
+        ListAggregator aggregator = new ListAggregator( new ListDeduplicator());
+        int distinct = aggregator.distinct(list);
 
         Assertions.assertEquals(4, distinct);
     }
     @Test
     public void distinct_bug_8726(){
         List<Integer> list=Arrays.asList(1,2,4,2);
-        ListAggregator aggregator = new ListAggregator();
-        int distinct = aggregator.distinct(list, new GenericListDeduplicator() {
+        ListAggregator aggregator = new ListAggregator(  new GenericListDeduplicator() {
             @Override
             public List<Integer> deduplicate(List<Integer> inputList) {
                 return Arrays.asList(1,2,4);
             }
         });
+        int distinct = aggregator.distinct(list);
 
         Assertions.assertEquals(3, distinct);
     }
