@@ -15,7 +15,7 @@ public class ListDeduplicatorTest {
         List<Integer> list =giveList();
         List<Integer> expected = Arrays.asList(1,2,4,5);
 
-        ListDeduplicator deduplicator = new ListDeduplicator();
+        ListDeduplicator deduplicator = new ListDeduplicator(new ListSorter());
         List<Integer> distinct = deduplicator.deduplicate(list);
 
         Assertions.assertEquals(expected, distinct);
